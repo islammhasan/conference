@@ -1,6 +1,5 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import Login from '@screens/Login';
 import EventsList from '@screens/EventsList';
 import Scanner from '@screens/Scanner';
 import Attendees from '@screens/Attendees';
@@ -17,12 +16,12 @@ import Reports from '@screens/Reports';
 
 const Stack = createStackNavigator();
 
-export const AppStack = () => {
+export const AdminStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="Dashboard"
       screenOptions={{headerShown: true, headerTitle: ''}}>
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="EventsList" component={EventsList} />
       <Stack.Screen name="Scanner" component={Scanner} />
       <Stack.Screen name="Attendees" component={Attendees} />
@@ -32,7 +31,6 @@ export const AppStack = () => {
         name="ExpressRegisteration"
         component={ExpressRegisteration}
       />
-      <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="EventResources" component={EventResources} />
       <Stack.Screen name="PDFReader" component={PDFReader} />
       <Stack.Screen name="Settings" component={Settings} />

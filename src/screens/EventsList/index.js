@@ -2,23 +2,16 @@ import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import Container from '@components/Container';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {styles} from './styles';
 
-export default EventsList = ({navigation}) => {
+export default ({navigation}) => {
   const EventItem = ({item}) => {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => navigation.navigate('Attendees', {name: item.name})}
-        style={{
-          height: 50,
-          marginHorizontal: 20,
-          backgroundColor: '#f1f1f1',
-          padding: 10,
-          justifyContent: 'center',
-        }}>
-        <Text style={{fontSize: 16, color: '#000'}}>
-          {item?.name || 'Default text'}
-        </Text>
+        onPress={() => navigation.navigate('Scanner')}
+        style={styles.eventItemContainer}>
+        <Text style={styles.eventItemText}>{item?.name || 'Default text'}</Text>
       </TouchableOpacity>
     );
   };
@@ -29,15 +22,7 @@ export default EventsList = ({navigation}) => {
 
   return (
     <Container>
-      <Text
-        style={{
-          marginStart: 20,
-          fontSize: 18,
-          marginVertical: 10,
-          color: '#000',
-        }}>
-        Events list
-      </Text>
+      <Text style={styles.title}>Events list</Text>
       <FlatList
         data={EVENTS}
         keyExtractor={item => item.id}

@@ -1,25 +1,54 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import {ScrollView} from 'react-native';
 import Container from '@components/Container';
+import {useDispatch, useSelector} from 'react-redux';
+import {signIn} from '../../redux/user';
+import Button from '@components/Button';
+import Input from '../../components/Input';
+import {styles} from './styles';
 
-export default Login = ({navigation, route}) => {
+export default Login = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const isExhibitor = Boolean(route.params?.exhibitor);
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.user.users);
+  const loggedUser = useSelector(state => state.user.userInfo);
+
+  // console.log('users available', users);
+
+  const user = {
+    username: username,
+    password: password,
+  };
 
   const isValid = username.length > 2 && password.length > 2;
 
   const Login = () => {
-    if (isValid) {
-      navigation.navigate(isExhibitor ? 'Exhibitor' : 'EventsList');
+    const validUser = users.find(
+      obj =>
+        user.username.toLowerCase() === obj.username.toLowerCase() &&
+        user.password === obj.password,
+    );
+    console.log('valid user', validUser);
+    if (isValid && validUser) {
+      dispatch(signIn(validUser));
+      // setLoading(true);
+      // console.log('user type', loggedUser.type);
+
+      // if (validUser.type === 'general') {
+      //   setLoading(false);
+      //   // navigation.navigate('Scanner');
+      // } else if (validUser.type === 'admin') {
+      //   setLoading(false);
+      //   // navigation.navigate('EventsList');
+      // } else {
+      //   setLoading(false);
+      //   // navigation.navigate('EventsList');
+      // }
     } else {
+      setLoading(false);
       alert(
         'Please enter a valid username and password, it must be 3 characters at least!',
       );
@@ -33,80 +62,30 @@ export default Login = ({navigation, route}) => {
           justifyContent: 'center',
           flex: 1,
         }}>
-        <TextInput
-          placeholder="Username"
-          placeholderTextColor={'#ccc'}
+        <Input
+          placeholder={'Username'}
           value={username}
           onChangeText={val => setUsername(val)}
-          style={{
-            marginHorizontal: 50,
-            color: '#000',
-            height: 50,
-            fontSize: 16,
-            borderBottomWidth: 1,
-          }}
+          style={styles.input}
         />
-        <TextInput
-          placeholder="Password"
-          placeholderTextColor={'#ccc'}
+        <Input
+          placeholder={'Password'}
+          secureTextEntry
           value={password}
-          secureTextEntry={true}
           onChangeText={val => setPassword(val)}
-          style={{
-            marginHorizontal: 50,
-            color: '#000',
-            height: 50,
-            fontSize: 16,
-            borderBottomWidth: 1,
-          }}
+          style={styles.input}
         />
-
-        <TouchableOpacity
-          activeOpacity={0.8}
+        <Button
+          style={styles.btn}
+          loading={loading}
           onPress={Login}
-          style={{
-            // width: 200,
-            height: 50,
-            marginTop: 50,
-            marginHorizontal: 50,
-            backgroundColor: '#13d6a2',
-            justifyContent: 'center',
-            alignItems: 'center',
-            // alignSelf: 'center',
-          }}>
-          <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>
-            LOGIN
-          </Text>
-        </TouchableOpacity>
-        {!isExhibitor && (
-          <>
-            <Text
-              style={{
-                color: '#888',
-                fontSize: 16,
-                fontWeight: '600',
-                alignSelf: 'center',
-                marginTop: 50,
-              }}>
-              Or
-            </Text>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => navigation.push('Login', {exhibitor: true})}
-              style={{
-                width: 200,
-                height: 50,
-                marginTop: 25,
-                justifyContent: 'center',
-                alignItems: 'center',
-                alignSelf: 'center',
-              }}>
-              <Text style={{color: '#13d6a2', fontSize: 16, fontWeight: '600'}}>
-                Login as Exhibitor
-              </Text>
-            </TouchableOpacity>
-          </>
-        )}
+          text={'LOGIN'}
+        />
+        {/* <Button
+          style={styles.btn}
+          text="ay 7aga"
+          onPress={() => navigation.navigate('Dashboard')}
+        /> */}
       </ScrollView>
     </Container>
   );

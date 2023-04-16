@@ -8,30 +8,43 @@ import {useIsFocused} from '@react-navigation/native';
 export default Scanner = ({navigation, route}) => {
   // const [data, setData] = useState(null);
 
-  const isFocued = useIsFocused();
+  const isFocused = useIsFocused();
 
-  const isLookup = Boolean(route.params?.lookup);
+  // const isLookup = Boolean(route.params?.lookup);
 
-  console.log('isLookup', isLookup);
+  // console.log('isLookup', isLookup);
+
+  // const onSuccess = e => {
+  //   console.log('response', e.data);
+  //   // setData(e.data);
+  //   isLookup
+  //     ? navigation.navigate('AttendeeDetails')
+  //     : Alert.alert(
+  //         null,
+  //         `You scanned ${e.data} and it has been registered as attendee`,
+  //         [
+  //           {
+  //             text: 'Ok',
+  //             // onPress: () => setRetake(true),
+  //           },
+  //         ],
+  //       );
+  // };
+
+  useEffect(() => {}, [isFocused]);
 
   const onSuccess = e => {
     console.log('response', e.data);
-    // setData(e.data);
-    isLookup
-      ? navigation.navigate('AttendeeDetails')
-      : Alert.alert(
-          null,
-          `You scanned ${e.data} and it has been registered as attendee`,
-          [
-            {
-              text: 'Ok',
-              // onPress: () => setRetake(true),
-            },
-          ],
-        );
+    Alert.alert(
+      null,
+      `You scanned ${e.data} and it has been registered as attendee`,
+      [
+        {
+          text: 'Ok',
+        },
+      ],
+    );
   };
-
-  useEffect(() => {}, [isFocued]);
 
   return (
     <Container>

@@ -9,5 +9,6 @@ export const styles = StyleSheet.create({
   input: {
     width: '80%',
     alignSelf: 'center',
+    zIndex: -1,
   },
 });

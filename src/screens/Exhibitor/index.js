@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import Container from '@components/Container';
 
-export default Exhibitor = ({navigation}) => {
+export default ({navigation}) => {
   return (
     <Container>
       <Text

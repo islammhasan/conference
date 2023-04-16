@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import Container from '@components/Container';
 
-export default Attendees = ({navigation, route}) => {
+export default ({navigation, route}) => {
   const {name} = route.params;
   const renderItem = ({item}) => {
     return (
