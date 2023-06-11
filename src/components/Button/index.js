@@ -8,16 +8,17 @@ import {
 import colors from '../../assets/colors';
 
 export default props => {
-  const {text, loading, style} = props;
+  const {text, loading, style, textStyle, loaderColor, disabled} = props;
   return (
     <TouchableOpacity
       {...props}
       activeOpacity={0.8}
-      style={[style, styles.container]}>
+      disabled={disabled || loading}
+      style={[styles.container, style]}>
       {loading ? (
-        <ActivityIndicator size={'small'} color={colors.white} />
+        <ActivityIndicator size={'small'} color={loaderColor || colors.white} />
       ) : (
-        <Text style={styles.txt}>{text}</Text>
+        <Text style={[styles.txt, textStyle]}>{text}</Text>
       )}
     </TouchableOpacity>
   );
@@ -25,10 +26,11 @@ export default props => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
+    // height: 50,
     backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 12,
   },
   txt: {
     color: colors.white,

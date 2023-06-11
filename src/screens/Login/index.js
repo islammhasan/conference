@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-import {ScrollView} from 'react-native';
+import {Alert, Image, ScrollView, Text} from 'react-native';
 import Container from '@components/Container';
 import {useDispatch, useSelector} from 'react-redux';
 import {signIn} from '../../redux/user';
 import Button from '@components/Button';
 import Input from '../../components/Input';
 import {styles} from './styles';
+import {images} from '../../assets/images';
+import en from '../../locales/en';
 
 export default Login = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -23,17 +25,38 @@ export default Login = ({navigation}) => {
     password: password,
   };
 
-  const isValid = username.length > 2 && password.length > 2;
+  // const isValid = username.length > 2 && password.length > 2;
 
-  const Login = () => {
+  const validation = {
+    username: username.length < 2,
+    password: password.length < 2,
+    emptyUsername: username.length === 0,
+    emptyPassword: password.length === 0,
+  };
+
+  const onSubmit = async () => {
+    if (validation.emptyUsername || validation.emptyPassword) {
+      Alert.alert(null, en.validation.pleaseFillAllFields, [{text: en.ok}]);
+    } else if (validation.password || validation.username) {
+      Alert.alert(null, en.validation.allFieldsMustBe2CharactersAtLeast, [
+        {text: en.ok},
+      ]);
+    } else {
+      setLoading(true);
+      await dispatch(signIn(user));
+      setLoading(false);
+    }
+  };
+
+  const onLogin = () => {
     const validUser = users.find(
       obj =>
         user.username.toLowerCase() === obj.username.toLowerCase() &&
         user.password === obj.password,
     );
     console.log('valid user', validUser);
-    if (isValid && validUser) {
-      dispatch(signIn(validUser));
+    if (isValid) {
+      dispatch(signIn(user));
       // setLoading(true);
       // console.log('user type', loggedUser.type);
 
@@ -62,23 +85,28 @@ export default Login = ({navigation}) => {
           justifyContent: 'center',
           flex: 1,
         }}>
+        <Image source={images.logo} resizeMode="contain" style={styles.logo} />
+        <Text style={styles.title}>Login</Text>
+        <Text style={styles.heading}>
+          Welcome! Please log in to access your account. We're glad to have you
+          here!"
+        </Text>
         <Input
           placeholder={'Username'}
           value={username}
+          containerStyle={styles.inputContainer}
           onChangeText={val => setUsername(val)}
-          style={styles.input}
         />
         <Input
           placeholder={'Password'}
           secureTextEntry
           value={password}
           onChangeText={val => setPassword(val)}
-          style={styles.input}
         />
         <Button
           style={styles.btn}
           loading={loading}
-          onPress={Login}
+          onPress={onSubmit}
           text={'LOGIN'}
         />
         {/* <Button

@@ -13,6 +13,7 @@ import Settings from '@screens/Settings';
 import Profile from '@screens/Profile';
 import PasswordChange from '@screens/PasswordChange';
 import Reports from '@screens/Reports';
+import UserProfile from '@screens/UserProfile';
 
 const Stack = createStackNavigator();
 
@@ -20,22 +21,52 @@ export const AdminStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="Dashboard"
-      screenOptions={{headerShown: true, headerTitle: ''}}>
-      <Stack.Screen name="Dashboard" component={Dashboard} />
-      <Stack.Screen name="EventsList" component={EventsList} />
+      screenOptions={{headerShown: true}}>
+      <Stack.Screen
+        name="Dashboard"
+        options={{headerTitle: ''}}
+        component={Dashboard}
+      />
+      <Stack.Screen
+        options={{headerTitle: 'Events List'}}
+        name="EventsList"
+        component={EventsList}
+      />
       <Stack.Screen name="Scanner" component={Scanner} />
       <Stack.Screen name="Attendees" component={Attendees} />
       <Stack.Screen name="Exhibitor" component={Exhibitor} />
-      <Stack.Screen name="AttendeeDetails" component={AttendeeDetails} />
       <Stack.Screen
+        options={{headerTitle: 'Attendee Details'}}
+        name="AttendeeDetails"
+        component={AttendeeDetails}
+      />
+      <Stack.Screen
+        options={{headerTitle: 'Express Registeration'}}
         name="ExpressRegisteration"
         component={ExpressRegisteration}
       />
-      <Stack.Screen name="EventResources" component={EventResources} />
-      <Stack.Screen name="PDFReader" component={PDFReader} />
+      <Stack.Screen
+        options={{headerTitle: 'Event Resources'}}
+        name="EventResources"
+        component={EventResources}
+      />
+      <Stack.Screen
+        options={{headerTitle: ''}}
+        name="PDFReader"
+        component={PDFReader}
+      />
       <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="PasswordChange" component={PasswordChange} />
+      <Stack.Screen
+        name="UserProfile"
+        options={{headerTitle: ''}}
+        component={UserProfile}
+      />
+      <Stack.Screen
+        options={{headerTitle: 'Password Change'}}
+        name="PasswordChange"
+        component={PasswordChange}
+      />
       <Stack.Screen name="Reports" component={Reports} />
     </Stack.Navigator>
   );

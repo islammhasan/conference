@@ -10,10 +10,16 @@ export const styles = StyleSheet.create({
   },
   listStyle: {
     alignSelf: 'center',
+    minWidth: 351,
   },
   itemContainer: {
-    width: 140,
-    marginHorizontal: 15,
+    width: 167.5,
+    height: 162,
+    backgroundColor: colors.primary,
+    marginHorizontal: 4,
+    paddingVertical: 25,
+    paddingHorizontal: 16,
+    borderRadius: 16,
   },
   innerContainer: {
     width: 140,
@@ -24,9 +30,10 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   itemText: {
-    fontSize: 16,
-    textAlign: 'center',
-    lineHeight: 24,
-    color: colors.black,
+    fontSize: 14,
+    textAlign: 'left',
+    lineHeight: 21,
+    color: colors.white,
+    marginTop: 8,
   },
 });

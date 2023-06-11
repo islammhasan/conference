@@ -1,36 +1,55 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import Container from '../../components/Container';
 import {styles} from './styles';
 import colors from '../../assets/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useDispatch, useSelector} from 'react-redux';
+import {getResources} from '../../redux/userdata';
 
 export default ({navigation}) => {
+  const data = useSelector(state => state.userdata.resources);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    await dispatch(getResources());
+  };
+
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate('PDFReader', {url: item.url})}
         activeOpacity={0.8}
         style={styles.itemContainer}>
-        <View style={styles.innerContainer}>
-          <Icon name={'document'} size={48} color={colors.white} />
+        <View style={{flex: 1}}>
+          <Icon name={'document'} size={30} color={colors.white} />
+          <Text numberOfLines={2} style={styles.itemText}>
+            {item.title}
+          </Text>
         </View>
-        <Text numberOfLines={2} style={styles.itemText}>
-          {item.title}
-        </Text>
+        <Icon
+          name={'download-outline'}
+          style={{alignSelf: 'flex-end'}}
+          size={22}
+          color={colors.white}
+        />
       </TouchableOpacity>
     );
   };
 
   const separator = () => {
-    return <View style={{height: 20}} />;
+    return <View style={{height: 8}} />;
   };
 
   return (
     <Container>
       <Text style={styles.title}>Event Resources</Text>
       <FlatList
-        data={ITEMS}
+        data={data}
         numColumns={2}
         contentContainerStyle={styles.listStyle}
         keyExtractor={item => item.id}

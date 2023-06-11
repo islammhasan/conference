@@ -1,24 +1,41 @@
-import React from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  FlatList,
+  RefreshControl,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Container from '@components/Container';
+import {useDispatch, useSelector} from 'react-redux';
+import en from '../../locales/en';
+import {styles} from './style';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Button from '@components/Button';
+import colors from '../../assets/colors';
+import {getAttendanceList} from '../../redux/attendance';
 
 export default ({navigation, route}) => {
-  const {name} = route.params;
+  const attendanceList = useSelector(state => state.attendance.attendanceList);
+  const [refreshing, setRefreshing] = useState(false);
+  const dispatch = useDispatch();
+
+  console.log('attendance list =>', attendanceList);
+
+  const getData = async () => {
+    await dispatch(getAttendanceList());
+  };
+
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        // onPress={() => navigation.navigate('Attendees', {name: item.name})}
-        style={{
-          height: 50,
-          marginHorizontal: 20,
-          backgroundColor: '#f1f1f1',
-          padding: 10,
-          justifyContent: 'center',
-        }}>
-        <Text style={{fontSize: 16, color: '#000'}}>
-          {item?.name || 'Default text'}
+        onPress={() => navigation.navigate('UserProfile', {user: item})}
+        style={styles.itemContainer}>
+        <Text numberOfLines={1} style={styles.itemText}>
+          {item?.title || en.defaultText}
         </Text>
+        <Icon name={'chevron-forward'} size={24} color={colors.gray} />
       </TouchableOpacity>
     );
   };
@@ -29,55 +46,28 @@ export default ({navigation, route}) => {
 
   return (
     <Container>
-      <Text
-        style={{
-          marginStart: 20,
-          fontSize: 18,
-          marginVertical: 10,
-          color: '#000',
-        }}>
-        {`${name} Attendees`}
-      </Text>
+      <Text style={styles.title}>{en.attendees}</Text>
       <FlatList
-        data={DATA}
+        data={attendanceList}
+        contentContainerStyle={styles.listStyle}
         keyExtractor={item => item.id}
         renderItem={renderItem}
         ItemSeparatorComponent={separator}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            tintColor={colors.gray}
+            onRefresh={getData}
+          />
+        }
         // ListFooterComponent={footerComponent}
       />
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate('Scanner')}
-        style={{
-          height: 50,
-          marginHorizontal: 20,
-          marginBottom: 10,
-          backgroundColor: '#13d6a2',
-          padding: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text style={{fontSize: 16, color: '#000'}}>Scan New Attendee</Text>
-      </TouchableOpacity>
+      <Button
+        style={styles.btn}
+        textStyle={styles.btnTxt}
+        onPress={() => navigation.navigate('EventsList')}
+        text={en.scanNewAttendee}
+      />
     </Container>
   );
 };
-
-const DATA = [
-  {
-    id: 'r1hf',
-    name: 'Ahmed',
-  },
-  {
-    id: 'hc1h',
-    name: 'Ali',
-  },
-  {
-    id: 'c191',
-    name: 'Kareem',
-  },
-  {
-    id: 'f891',
-    name: 'Mohammad',
-  },
-];

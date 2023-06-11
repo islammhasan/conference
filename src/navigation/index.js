@@ -8,17 +8,17 @@ import {AdminStack} from './AdminStack';
 import {ExhibitorStack} from './ExhibitorStack';
 
 export const NavContainer = () => {
-  const loggedUser = useSelector(state => state.user.userInfo);
+  const loggedUser = useSelector(state => state?.user?.userInfo);
   console.log('logged user', loggedUser);
   return (
     <NavigationContainer>
       {!loggedUser ? (
         <AuthStack />
-      ) : loggedUser?.type === 'general' ? (
+      ) : loggedUser?.roles_id === 1 ? (
         <UserStack />
-      ) : loggedUser?.type === 'admin' ? (
+      ) : loggedUser?.roles_id === 2 ? (
         <AdminStack />
-      ) : loggedUser?.type === 'exhibitor' ? (
+      ) : loggedUser?.roles_id === 4 ? (
         <ExhibitorStack />
       ) : null}
     </NavigationContainer>

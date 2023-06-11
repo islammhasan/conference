@@ -9,14 +9,60 @@ export const styles = StyleSheet.create({
     color: colors.black,
   },
   eventItemContainer: {
-    height: 50,
+    height: 196,
     marginHorizontal: 20,
-    backgroundColor: '#f1f1f1',
-    padding: 10,
-    justifyContent: 'center',
+    backgroundColor: colors.offWhite,
+    padding: 8,
+    borderRadius: 8,
+  },
+  eventInfoContainer: {
+    flexDirection: 'row',
+  },
+  eventInfoInner: {
+    paddingVertical: 8,
+    flex: 1,
+  },
+  eventImageContainer: {
+    width: 105,
+    height: 80,
+    borderRadius: 8,
+    overflow: 'hidden',
+    marginEnd: 20,
+  },
+  eventImage: {
+    width: 105,
+    height: 80,
   },
   eventItemText: {
     fontSize: 16,
     color: colors.black,
+  },
+  eventLocationContainer: {
+    maxWidth: '50%',
+    height: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.secondary,
+    borderRadius: 4,
+    marginEnd: 12,
+    paddingHorizontal: 10,
+  },
+  locationDateSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  eventLocationText: {
+    fontSize: 12,
+    color: colors.black,
+  },
+  eventDate: {
+    color: colors.gray,
+    fontSize: 15,
+    flex: 1,
+  },
+  eventDescription: {
+    fontSize: 13,
+    color: colors.darkgray,
   },
 });

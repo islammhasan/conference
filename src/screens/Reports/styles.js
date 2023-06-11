@@ -2,13 +2,80 @@ import {StyleSheet} from 'react-native';
 import colors from '../../assets/colors';
 
 export const styles = StyleSheet.create({
-  title: {
-    marginStart: 20,
-    fontSize: 20,
-    color: colors.black,
-    marginTop: 20,
-    marginBottom: 10,
+  headerContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    paddingTop: 26,
+    paddingBottom: 5,
+    justifyContent: 'space-between',
+    backgroundColor: colors.white,
   },
+  tabsContainer: {
+    flexDirection: 'row',
+    gap: 8,
+    justifyContent: 'center',
+    marginBottom: 20,
+    marginTop: 24,
+  },
+  tabBtn: {
+    width: 167,
+    height: 40,
+    backgroundColor: colors.primary,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tabText: {
+    fontSize: 14,
+    color: colors.white,
+    fontWeight: '500',
+    textAlign: 'center',
+  },
+  heading: {
+    fontSize: 16,
+    color: colors.black,
+    fontWeight: '400',
+    marginBottom: 16,
+  },
+  insightsContainer: {
+    paddingHorizontal: 16,
+    backgroundColor: colors.white,
+  },
+  numberTxt: {
+    fontSize: 40,
+    color: colors.text,
+    fontWeight: '700',
+    marginEnd: 8,
+  },
+  rateContainer: {
+    flexDirection: 'row',
+    backgroundColor: colors.rateBg,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 48,
+    padding: 8,
+    maxWidth: 200,
+  },
+  rateText: {
+    color: colors.rateText,
+    marginStart: 8,
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  attendanceText: {
+    fontSize: 12,
+    fontWeight: '400',
+    color: colors.gray,
+    marginTop: 10,
+  },
+  // title: {
+  //   marginStart: 20,
+  //   fontSize: 20,
+  //   color: colors.black,
+  //   marginTop: 20,
+  //   marginBottom: 10,
+  // },
   listStyle: {
     justifyContent: 'center',
     paddingVertical: 10,
@@ -36,6 +103,21 @@ export const styles = StyleSheet.create({
   },
   graphStyle: {
     marginVertical: 8,
+    alignSelf: 'center',
     // borderRadius: 16,
+  },
+  head: {
+    height: 40,
+    paddingHorizontal: 16,
+  },
+  headText: {
+    fontSize: 8,
+    fontWeight: '500',
+    color: colors.gray,
+  },
+  tableRowText: {
+    fontSize: 10,
+    color: colors.dark,
+    fontWeight: '400',
   },
 });
