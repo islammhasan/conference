@@ -95,7 +95,7 @@ export default ({navigation}) => {
 
   return (
     <Container>
-      <ScrollView contentContainerStyle={{flex: 1, paddingBottom: 30}}>
+      <ScrollView>
         <View style={{backgroundColor: colors.bg, height: 60}} />
         <View style={styles.profileImageContainer}>
           <Image

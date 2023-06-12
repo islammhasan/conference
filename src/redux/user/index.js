@@ -2,6 +2,7 @@ import {Alert} from 'react-native';
 import en from '../../locales/en';
 import {AxiosClient} from '../../services/api';
 import {clearAttendance} from '../attendance';
+import {clearUserdata} from '../userdata';
 
 const types = {
   LOGIN_SUCESS: 'LOGIN_SUCESS',
@@ -103,6 +104,7 @@ export const logout = () => async (dispatch, getState) => {
     console.log('res from logout', res);
     dispatch({type: types.LOG_OUT_SUCCESS});
     dispatch(clearAttendance());
+    dispatch(clearUserdata());
   } catch (error) {
     console.log('error from logout', error);
     dispatch({type: types.LOG_OUT_FAILED});

@@ -7,6 +7,7 @@ const types = {
   GET_EVENTS_FAILED: 'GET_EVENTS_FAILED',
   GET_RESOURCES_SUCCESS: 'GET_RESOURCES_SUCCESS',
   GET_RESOURCES_FAILED: 'GET_RESOURCES_FAILED',
+  CLEAR_SUCCESS: `CLEAR_SUCCESS`,
 };
 
 export const getEvents = () => async (dispatch, getState) => {
@@ -52,6 +53,10 @@ export const getResources = () => async (dispatch, getState) => {
   }
 };
 
+export const clearUserdata = () => (dispatch, getState) => {
+  dispatch({type: types.CLEAR_SUCCESS});
+};
+
 const initialState = {
   events: [],
   resources: [],
@@ -79,6 +84,8 @@ export default (state = initialState, {type, payload}) => {
         ...state,
         resources: [],
       };
+    case types.CLEAR_SUCCESS:
+      initialState;
     default:
       return state;
   }

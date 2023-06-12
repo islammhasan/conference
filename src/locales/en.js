@@ -5,6 +5,8 @@ export default {
   yourProfileHasBeenSuccessfullyUpdated: `Your profile has been successfully updated`,
   successfullyRegistered: `Successfully registered`,
   successfullyAddedToTheAttendanceList: `Succesffully added to the attendance list`,
+  thereAreNoEventsAssociatedWithThisUser: `There are no events associated with this user`,
+  nothingToShow: `Nothing to show`,
   wrongEmailOrPassword: `Wrong email or password`,
   oldPasswordWrong: `Old password wrong`,
   ok: `Ok`,

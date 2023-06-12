@@ -29,4 +29,14 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.red,
   },
+  noEventsView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 30,
+  },
+  noEventsText: {
+    fontSize: 16,
+    color: colors.black,
+  },
 });

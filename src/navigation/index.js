@@ -14,7 +14,7 @@ export const NavContainer = () => {
     <NavigationContainer>
       {!loggedUser ? (
         <AuthStack />
-      ) : loggedUser?.roles_id === 1 ? (
+      ) : loggedUser?.roles_id === 5 ? (
         <UserStack />
       ) : loggedUser?.roles_id === 2 ? (
         <AdminStack />

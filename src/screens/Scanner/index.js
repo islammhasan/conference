@@ -1,20 +1,24 @@
-import React, {useEffect, useLayoutEffect} from 'react';
-import {Text, Alert, TouchableOpacity} from 'react-native';
-import Container from '@components/Container';
-import QRCodeScanner from 'react-native-qrcode-scanner';
-import {RNCamera} from 'react-native-camera';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {Text, Alert, TouchableOpacity, View} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {logout} from '../../redux/user';
 import {styles} from './styles';
 import en from '../../locales/en';
+// import {RNCamera} from 'react-native-camera';
 import {AxiosClient} from '../../services/api';
+import {useDispatch, useSelector} from 'react-redux';
+import {logout} from '../../redux/user';
+import {getEvents} from '../../redux/userdata';
+import Container from '@components/Container';
+import Loader from '@components/Loader';
+import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default Scanner = ({navigation, route}) => {
   // const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
   const loggedUserType = useSelector(state => state?.user?.userInfo?.roles_id);
+  const staffEventId = useSelector(state => state?.userdata?.events[0]?.id);
   const isExhibitor = loggedUserType === 4;
-  const isGen = loggedUserType === 1;
+  const isGen = loggedUserType === 5;
   const isAdmin = loggedUserType === 2;
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
@@ -25,14 +29,32 @@ export default Scanner = ({navigation, route}) => {
     });
   }, [navigation]);
 
+  const signOut = async () => {
+    setLoading(true);
+    await dispatch(logout());
+    setLoading(false);
+  };
+
   const Logout = () => {
     return (
       <TouchableOpacity
-        onPress={() => dispatch(logout())}
-        style={styles.logoutBtn}>
+        onPress={signOut}
+        style={styles.logoutBtn}
+        disabled={loading}
+        activeOpacity={0.8}>
         <Text style={styles.logoutTxt}>Logout</Text>
       </TouchableOpacity>
     );
+  };
+
+  useEffect(() => {
+    isGen && fetch();
+  }, []);
+
+  const fetch = async () => {
+    setLoading(true);
+    await dispatch(getEvents());
+    setLoading(false);
   };
 
   useEffect(() => {}, [isFocused]);
@@ -49,9 +71,11 @@ export default Scanner = ({navigation, route}) => {
         Alert.alert(null, en.successfullyAddedToTheAttendanceList, [
           {text: en.ok},
         ]);
-        navigation.navigate('UserProfile', {
-          refId: res?.data?.attendee?.reference_id,
-        });
+        if (!isGen) {
+          navigation.navigate('UserProfile', {
+            refId: res?.data?.attendee?.reference_id,
+          });
+        }
       } else {
         Alert.alert(null, en.somethingWentWrongPleaseTryAgainLater, [
           {text: en.ok},
@@ -67,18 +91,18 @@ export default Scanner = ({navigation, route}) => {
   };
 
   const onSuccess = e => {
-    console.log('response', e.data);
+    console.log('QR response', e.data);
 
     if (isGen) {
-      Alert.alert(
-        null,
-        `You scanned ${e.data} and it has been registered as attendee`,
-        [
+      if (staffEventId) {
+        addAttendance(e.data, staffEventId);
+      } else {
+        Alert.alert(null, en.somethingWentWrongPleaseTryAgainLater, [
           {
             text: 'Ok',
           },
-        ],
-      );
+        ]);
+      }
     } else if (isExhibitor) {
       addAttendance(e.data, route?.params?.eventId);
     } else if (isAdmin) {
@@ -90,15 +114,30 @@ export default Scanner = ({navigation, route}) => {
     }
   };
 
+  const showScanner =
+    (staffEventId != undefined && isGen) || isExhibitor || isAdmin;
+
   return (
     <Container>
-      <QRCodeScanner
-        onRead={onSuccess}
-        reactivate={true}
-        reactivateTimeout={5000}
-        // flashMode={RNCamera.Constants.FlashMode.torch}
-        topContent={<Text style={styles.centerText}>Scan QR Code</Text>}
-      />
+      {!loading ? (
+        showScanner ? (
+          <QRCodeScanner
+            onRead={onSuccess}
+            reactivate={true}
+            reactivateTimeout={5000}
+            // flashMode={RNCamera.Constants.FlashMode.torch}
+            topContent={<Text style={styles.centerText}>Scan QR Code</Text>}
+          />
+        ) : (
+          <View style={styles.noEventsView}>
+            <Text style={styles.noEventsText}>
+              {en.thereAreNoEventsAssociatedWithThisUser}
+            </Text>
+          </View>
+        )
+      ) : (
+        <Loader />
+      )}
     </Container>
   );
 };
