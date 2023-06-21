@@ -115,14 +115,24 @@ export default ({navigation}) => {
     setActiveBar(datum.index);
   };
 
-  const CustomTooltip = ({datum}) => (
+  // const CustomTooltip = ({datum}) => (
+  //   <VictoryTooltip
+  //     {...datum}
+  //     flyoutStyle={{stroke: 'black'}}
+  //     cornerRadius={0}
+  //     pointerLength={10}
+  //     flyoutWidth={100}
+  //     flyoutHeight={50}
+  //     renderInPortal={false}
+  //   />
+  // );
+  const CustomTooltip = ({ datum }) => (
     <VictoryTooltip
-      {...datum}
-      flyoutStyle={{stroke: 'black'}}
-      cornerRadius={0}
+      style={{ fill: "black" }}
+      flyoutStyle={{ stroke: "tomato" }}
+      cornerRadius={5}
       pointerLength={10}
-      flyoutWidth={100}
-      flyoutHeight={50}
+      text={`${datum.x}: ${datum.y}`}
       renderInPortal={false}
     />
   );
@@ -155,14 +165,14 @@ export default ({navigation}) => {
           <View style={styles.insightsContainer}>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.numberTxt}>{attendanceCount}</Text>
-              <View style={styles.rateContainer}>
+              {/* <View style={styles.rateContainer}>
                 <Icon name={'trending-up'} size={22} color={colors.rateText} />
                 <Text style={styles.rateText}>+12,7 %</Text>
-              </View>
+              </View> */}
             </View>
-            <Text style={styles.attendanceText}>
+            {/* <Text style={styles.attendanceText}>
               Attendance is more vs. last week
-            </Text>
+            </Text> */}
           </View>
           <VictoryChart
             animate={{
@@ -194,7 +204,7 @@ export default ({navigation}) => {
                   },
                 },
               ]}
-              labelComponent={<CustomTooltip />}
+              // labelComponent={<CustomTooltip />}
               labels={({datum}) => datum.visitors}
               data={attendanceReport}
               x="day"

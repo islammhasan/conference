@@ -1,122 +1,84 @@
-import React, {useEffect} from 'react';
-import {View, Text, FlatList, Image} from 'react-native';
-import Container from '@components/Container';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {styles} from './styles';
-import {images} from '../../assets/images';
-import {getEvents} from '../../redux/userdata';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  RefreshControl,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {getEvents} from '../../redux/userdata';
+// Styles and assets imports
+import {styles} from './styles';
+import colors from '../../assets/colors';
+// Component imports
+import Container from '@components/Container';
+import EmptyPlaceholder from '@components/EmptyPlaceholder';
+import EventCard from '@components/EventCard';
+//Localization imports
+import en from '../../locales/en';
+
+const EventItem = ({item, navigation}) => {
+  const handlePress = () => {
+    navigation.navigate('Scanner', {eventId: item.id});
+  };
+
+  return <EventCard item={item} handlePress={handlePress} />;
+};
 
 export default ({navigation}) => {
   const dispatch = useDispatch();
-  const events = useSelector(state => state.userdata.events);
-
-  console.log('events in screen =>', events);
-
-  const EventItem = ({item}) => {
-    const strippedDesc = item?.description?.replace(
-      /(<([^>]+)>|[$@^]|&[a-z]+;|&#\d+;)/gi,
-      '',
-    );
-    const date = item?.end_date?.slice(0, 10);
-
-    return (
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate('Scanner', {eventId: item.id})}
-        style={styles.eventItemContainer}>
-        <View style={styles.eventInfoContainer}>
-          <View style={styles.eventImageContainer}>
-            <Image
-              source={{uri: `${item.image}`} || images.event}
-              style={styles.eventImage}
-              resizeMode="contain"
-            />
-          </View>
-          <View style={styles.eventInfoInner}>
-            <Text style={styles.eventItemText}>
-              {item?.title || 'NO TITLE'}
-            </Text>
-            <View style={styles.locationDateSection}>
-              <View style={styles.eventLocationContainer}>
-                <Text numberOfLines={1} style={styles.eventLocationText}>
-                  {item?.location || 'Doha'}
-                </Text>
-              </View>
-              <Text numberOfLines={1} style={styles.eventDate}>
-                {date || `NO DATE`}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <Text
-          numberOfLines={1}
-          style={[styles.eventDescription, {marginTop: 12}]}>
-          Description:
-        </Text>
-        <Text numberOfLines={4} style={[styles.eventDescription, {flex: 1}]}>
-          {strippedDesc || 'NO DESCRIPTION'}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
-
-  const separator = () => {
-    return <View style={{height: 8}} />;
-  };
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const events = useSelector(state => state?.userdata?.events);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
+    setLoading(true);
     await dispatch(getEvents());
+    setLoading(false);
+  };
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await dispatch(getEvents());
+    setRefreshing(false);
+  };
+
+  const renderSeparator = () => {
+    return <View style={{height: 8}} />;
   };
 
   return (
     <Container>
-      <Text style={styles.title}>Events list</Text>
-      <FlatList
-        data={events}
-        keyExtractor={item => item.id}
-        renderItem={EventItem}
-        ItemSeparatorComponent={separator}
-      />
+      <Text style={styles.title}>{en.eventsList}</Text>
+      {loading ? (
+        <ActivityIndicator
+          size="small"
+          color={colors.gray}
+          style={{marginTop: 30}}
+        />
+      ) : (
+        <FlatList
+          data={events}
+          keyExtractor={item => item.id.toString()}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item}) => EventItem({item, navigation})}
+          contentContainerStyle={{paddingVertical: 15}}
+          ItemSeparatorComponent={renderSeparator}
+          ListEmptyComponent={EmptyPlaceholder}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              tintColor={colors.gray}
+              onRefresh={handleRefresh}
+            />
+          }
+        />
+      )}
     </Container>
   );
 };
-
-// const EVENTS = [
-//   {
-//     id: '182hd',
-//     name: 'Event 1',
-//     location: 'Doha',
-//     date: '09.02.2023',
-//     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.`,
-//     image: images.event,
-//   },
-//   {
-//     id: 'f103h',
-//     name: 'Event 2',
-//     location: 'Doha',
-//     date: '09.02.2023',
-//     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s`,
-//     image: images.event,
-//   },
-//   {
-//     id: 'f1u2',
-//     name: 'Event 3',
-//     location: 'Doha',
-//     date: '09.02.2023',
-//     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s`,
-//     image: images.event,
-//   },
-//   {
-//     id: '09f12',
-//     name: 'Event 4',
-//     location: 'Doha',
-//     date: '09.02.2023',
-//     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s`,
-//     image: images.event,
-//   },
-// ];

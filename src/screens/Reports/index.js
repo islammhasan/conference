@@ -28,15 +28,26 @@ export default ({navigation}) => {
   const {attendanceReport, attendanceCount} = useSelector(
     state => state?.attendance,
   );
-  console.log('attendance ==>', attendanceReport);
+  const attendanceList = useSelector(state => state.attendance.attendanceList);
+  console.log('att in reports', attendanceList);
+  // console.log('attendance ==>', attendanceReport);
   const tableHead = ['Name', 'Phone', 'Email'];
-  const tableData = [
-    ['Mohamed', '(303) 424-5762', 'mo@example.com'],
-    ['Ahmed', '(712) 539-9827', 'ahmed@example.com'],
-    ['Ali', '(303) 424-5762', 'ali@example.com'],
-    ['Mahmoud', '(712) 539-9827', 'mahmoud@example.com'],
-    ['Someone', '(303) 424-5762', 'someone@example.com'],
-  ];
+  // const tableData = [
+  //   ['Mohamed', '(303) 424-5762', 'mo@example.com'],
+  //   ['Ahmed', '(712) 539-9827', 'ahmed@example.com'],
+  //   ['Ali', '(303) 424-5762', 'ali@example.com'],
+  // ];
+
+  // const newArray = attendanceList.map(({title, mobile, email}) => [
+  //   title,
+  //   mobile,
+  //   email,
+  // ]);
+
+  const tableData = attendanceList
+    .filter(obj => obj.title)
+    .map(({title, mobile, email}) => [title, mobile, email]);
+  console.log('new att list array', tableData);
 
   const handlePress = (event, datum) => {
     setActiveBar(datum.index);
@@ -89,14 +100,14 @@ export default ({navigation}) => {
           <View style={styles.insightsContainer}>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.numberTxt}>{attendanceCount}</Text>
-              <View style={styles.rateContainer}>
+              {/* <View style={styles.rateContainer}>
                 <Icon name={'trending-up'} size={22} color={colors.rateText} />
                 <Text style={styles.rateText}>+12,7 %</Text>
-              </View>
+              </View> */}
             </View>
-            <Text style={styles.attendanceText}>
+            {/* <Text style={styles.attendanceText}>
               Attendance is more vs. last week
-            </Text>
+            </Text> */}
           </View>
           <VictoryChart
             animate={{
@@ -128,7 +139,7 @@ export default ({navigation}) => {
                   },
                 },
               ]}
-              labelComponent={<CustomTooltip />}
+              // labelComponent={<CustomTooltip />}
               labels={({datum}) => datum.visitors}
               data={attendanceReport}
               x="day"

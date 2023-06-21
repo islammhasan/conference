@@ -6,11 +6,12 @@ export const styles = StyleSheet.create({
     marginStart: 20,
     fontSize: 20,
     color: colors.black,
-    marginVertical: 20,
+    marginTop: 20,
   },
   listStyle: {
     alignSelf: 'center',
     minWidth: 351,
+    paddingVertical: 20,
   },
   itemContainer: {
     width: 167.5,
@@ -21,14 +22,14 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 16,
   },
-  innerContainer: {
-    width: 140,
-    height: 180,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.gray,
-    marginBottom: 5,
-  },
+  // innerContainer: {
+  //   width: 140,
+  //   height: 180,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   backgroundColor: colors.gray,
+  //   marginBottom: 5,
+  // },
   itemText: {
     fontSize: 14,
     textAlign: 'left',

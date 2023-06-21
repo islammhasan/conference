@@ -1,4 +1,4 @@
-package com.conference;
+package com.daralsharq.eventapp;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

@@ -16,26 +16,17 @@ export const getAttendanceReport = () => async (dispatch, getState) => {
   try {
     const res = await AxiosClient(`user/attendance-report`);
     console.log('res from attendance report', res.data);
-    const arr = [];
 
-    for (var [key, value] of Object.entries(res.data)) {
-      arr.push({[key]: value});
-    }
-
-    // const popedArr = arr.slice(0, arr.length - 1);
+    const arr = Object.entries(res?.data).map(([key, value]) => ({
+      [key]: value,
+    }));
 
     const totalCount = arr[arr.length - 1]?.count;
 
-    console.log('total count =>', totalCount);
-
-    const newArr = [];
-
-    for (let i = 0; i < arr.length - 1; i++) {
-      newArr.push({
-        day: Object.entries(arr[i])[0][0],
-        visitors: Object.entries(arr[i])[0][1].length,
-      });
-    }
+    const newArr = arr.slice(0, -1).map(item => ({
+      day: Object.keys(item)[0],
+      visitors: item[Object.keys(item)[0]].length,
+    }));
 
     if (res?.data) {
       dispatch({

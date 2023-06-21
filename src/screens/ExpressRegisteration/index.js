@@ -1,11 +1,16 @@
+// React imports
 import React, {useState} from 'react';
-import {Alert, ScrollView, Text} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
+// Component imports
 import Container from '@components/Container';
 import Input from '@components/Input';
 import Button from '@components/Button';
+// import Dropdown from '@components/Dropdown';
+// Styles imports
 import {styles} from './styles';
-import Dropdown from '@components/Dropdown';
+// Localization imports
 import en from '../../locales/en';
+// API imports
 import {AxiosClient} from '../../services/api';
 
 export default () => {
@@ -13,7 +18,7 @@ export default () => {
   const [email, setEmail] = useState('');
   const [company, setCompany] = useState('');
   const [designation, setDesignation] = useState('');
-  const [country, setCountry] = useState(null);
+  // const [country, setCountry] = useState(null);
   const [mobile, setMobile] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -23,15 +28,6 @@ export default () => {
     company,
     mobile,
     designation,
-  };
-
-  const clear = () => {
-    setName('');
-    setEmail('');
-    setCompany('');
-    setDesignation('');
-    // setCountry(null);
-    setMobile('');
   };
 
   const validation = {
@@ -58,13 +54,23 @@ export default () => {
     return regex.test(email);
   }
 
-  const register = async () => {
+  function clear() {
+    setName('');
+    setEmail('');
+    setCompany('');
+    setDesignation('');
+    // setCountry(null);
+    setMobile('');
+  }
+
+  async function register() {
     setLoading(true);
     try {
       const res = await AxiosClient(`user/register`, {body: body});
       console.log('res from register', res.data);
       Alert.alert(null, en.successfullyRegistered, [{text: en.ok}]);
       setLoading(false);
+      clear();
     } catch (error) {
       console.log('error from register ==>', error);
       Alert.alert(null, en.somethingWentWrongPleaseTryAgainLater, [
@@ -72,14 +78,13 @@ export default () => {
       ]);
       setLoading(false);
     }
-  };
+  }
 
-  const submit = () => {
+  function submit() {
     if (!validFields) {
       Alert.alert(null, en.validation.allFieldsMustBe3CharactersAtLeast, [
         {text: en.ok},
       ]);
-      // clear();
     } else if (!phoneValidation) {
       Alert.alert(null, en.validation.pleaseEnterAValidMobileNumber, [
         {text: en.ok},
@@ -89,12 +94,12 @@ export default () => {
     } else {
       register();
     }
-  };
+  }
 
   return (
     <Container style={{marginTop: 15}}>
       <ScrollView
-        contentContainerStyle={{paddingTop: 26}}
+        contentContainerStyle={{paddingVertical: 20}}
         showsVerticalScrollIndicator={false}>
         <Input
           value={name}
@@ -151,13 +156,13 @@ export default () => {
   );
 };
 
-const COUNTRIES = [
-  {
-    id: '8e12h',
-    label: 'Qatar',
-  },
-  {
-    id: '2d1h',
-    label: 'Emirates',
-  },
-];
+// const COUNTRIES = [
+//   {
+//     id: '8e12h',
+//     label: 'Qatar',
+//   },
+//   {
+//     id: '2d1h',
+//     label: 'Emirates',
+//   },
+// ];

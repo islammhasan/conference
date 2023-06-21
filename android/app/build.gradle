@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.conference"
+    namespace "com.daralsharq.eventapp"
     defaultConfig {
-        applicationId "com.conference"
+        applicationId "com.daralsharq.eventapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

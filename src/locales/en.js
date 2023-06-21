@@ -10,6 +10,8 @@ export default {
   wrongEmailOrPassword: `Wrong email or password`,
   oldPasswordWrong: `Old password wrong`,
   ok: `Ok`,
+  eventResources: `Event Resources`,
+  eventsList: `Events list`,
   validation: {
     pleaseFillAllFields: `Please fill all fields`,
     allFieldsMustBe2CharactersAtLeast: `All fields must be 2 characters at least`,

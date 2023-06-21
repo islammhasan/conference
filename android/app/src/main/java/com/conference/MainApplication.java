@@ -1,4 +1,4 @@
-package com.conference;
+package com.daralsharq.eventapp;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

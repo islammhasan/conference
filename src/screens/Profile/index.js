@@ -103,14 +103,14 @@ export default ({navigation}) => {
             resizeMode="contain"
             style={styles.profileImageStyle}
           />
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.photoBtn}
             activeOpacity={1}
             onPress={() => alert('Take photo')}>
             <View style={styles.photoBtnInner}>
               <Icon name={'camera'} size={18} color={colors.white} />
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View>
           <Input
