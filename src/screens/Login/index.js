@@ -80,14 +80,11 @@ export default Login = ({navigation}) => {
 
   return (
     <Container>
-      <ScrollView
-        contentContainerStyle={{
-          justifyContent: 'center',
-          flex: 1,
-        }}>
+      <ScrollView contentContainerStyle={{paddingTop: 40}}>
         <Image source={images.logo} resizeMode="contain" style={styles.logo} />
-        <Text style={styles.title}>Login</Text>
-        <Text style={styles.heading}>
+        <Text style={styles.title}>Event App</Text>
+        <Text style={styles.heading}>Login</Text>
+        <Text style={styles.subHeading}>
           Welcome! Please log in to access your account. We're glad to have you
           here!"
         </Text>
