@@ -29,6 +29,7 @@ import {
   getAttendanceList,
   getAttendanceReport,
   getAttendeeDetails,
+  getRegReport,
 } from '../../redux/attendance';
 import {getProfile} from '../../redux/user';
 
@@ -44,6 +45,7 @@ export default ({navigation}) => {
 
   const getData = async () => {
     await dispatch(getAttendanceReport());
+    await dispatch(getRegReport());
     await dispatch(getAttendanceList());
     // await dispatch(getAttendeeDetails());
     // await dispatch(addAttendance());
@@ -126,10 +128,10 @@ export default ({navigation}) => {
   //     renderInPortal={false}
   //   />
   // );
-  const CustomTooltip = ({ datum }) => (
+  const CustomTooltip = ({datum}) => (
     <VictoryTooltip
-      style={{ fill: "black" }}
-      flyoutStyle={{ stroke: "tomato" }}
+      style={{fill: 'black'}}
+      flyoutStyle={{stroke: 'tomato'}}
       cornerRadius={5}
       pointerLength={10}
       text={`${datum.x}: ${datum.y}`}

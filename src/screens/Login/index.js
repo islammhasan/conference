@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Alert, Image, ScrollView, Text} from 'react-native';
 import Container from '@components/Container';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {signIn} from '../../redux/user';
 import Button from '@components/Button';
 import Input from '../../components/Input';
@@ -9,23 +9,17 @@ import {styles} from './styles';
 import {images} from '../../assets/images';
 import en from '../../locales/en';
 
-export default Login = ({navigation}) => {
+export default Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
-  const users = useSelector(state => state.user.users);
-  const loggedUser = useSelector(state => state.user.userInfo);
-
-  // console.log('users available', users);
 
   const user = {
     username: username,
     password: password,
   };
-
-  // const isValid = username.length > 2 && password.length > 2;
 
   const validation = {
     username: username.length < 2,
@@ -45,36 +39,6 @@ export default Login = ({navigation}) => {
       setLoading(true);
       await dispatch(signIn(user));
       setLoading(false);
-    }
-  };
-
-  const onLogin = () => {
-    const validUser = users.find(
-      obj =>
-        user.username.toLowerCase() === obj.username.toLowerCase() &&
-        user.password === obj.password,
-    );
-    console.log('valid user', validUser);
-    if (isValid) {
-      dispatch(signIn(user));
-      // setLoading(true);
-      // console.log('user type', loggedUser.type);
-
-      // if (validUser.type === 'general') {
-      //   setLoading(false);
-      //   // navigation.navigate('Scanner');
-      // } else if (validUser.type === 'admin') {
-      //   setLoading(false);
-      //   // navigation.navigate('EventsList');
-      // } else {
-      //   setLoading(false);
-      //   // navigation.navigate('EventsList');
-      // }
-    } else {
-      setLoading(false);
-      alert(
-        'Please enter a valid username and password, it must be 3 characters at least!',
-      );
     }
   };
 
@@ -106,11 +70,6 @@ export default Login = ({navigation}) => {
           onPress={onSubmit}
           text={'LOGIN'}
         />
-        {/* <Button
-          style={styles.btn}
-          text="ay 7aga"
-          onPress={() => navigation.navigate('Dashboard')}
-        /> */}
       </ScrollView>
     </Container>
   );

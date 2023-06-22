@@ -35,10 +35,11 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    fontSize: 22,
+    fontSize: 18,
     color: colors.dark,
     marginTop: 15,
     textAlign: 'center',
+    textTransform: 'capitalize',
   },
   number: {
     fontSize: 40,

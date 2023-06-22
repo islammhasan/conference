@@ -9,6 +9,8 @@ const types = {
   GET_ATTENDANCE_LIST_FAILED: 'GET_ATTENDANCE_LIST_FAILED',
   GET_ATTENDEE_SUCCESS: 'GET_ATTENDEE_SUCCESS',
   GET_ATTENDEE_FAILED: 'GET_ATTENDEE_FAILED',
+  GET_REGREPORT_SUCCESS: `GET_REGREPORT_SUCCESS`,
+  GET_REGREPORT_FAILED: `GET_REGREPORT_FAILED`,
   CLEAR_SUCCESS: 'CLEAR_SUCCESS',
 };
 
@@ -71,11 +73,35 @@ export const getAttendanceList = () => async (dispatch, getState) => {
   }
 };
 
+export const getRegReport = () => async (dispatch, getState) => {
+  try {
+    const res = await AxiosClient(`user/registration-report`);
+    if (res.data) {
+      dispatch({
+        type: types.GET_REGREPORT_SUCCESS,
+        payload: res?.data,
+      });
+    } else {
+      dispatch({type: types.GET_REGREPORT_FAILED});
+      Alert.alert(null, en.somethingWentWrongPleaseTryAgainLater, [
+        {text: en.ok},
+      ]);
+    }
+  } catch (error) {
+    Alert.alert(null, en.somethingWentWrongPleaseTryAgainLater, [
+      {text: en.ok},
+    ]);
+    console.log('error from attenancelist ==>', error);
+    dispatch({type: types.GET_REGREPORT_FAILED});
+  }
+};
+
 export const getAttendeeDetails = refId => async (dispatch, getState) => {
   try {
     const res = await AxiosClient(`user/attendance`, {
       body: {
-        reference_id: 'QOI2023V0028',
+        reference_id: refId,
+        // reference_id: 'QOI2023V0028',
       },
     });
     console.log('get attendee details ==>', res);
@@ -113,6 +139,7 @@ const initialState = {
   attendanceReport: [],
   attendanceCount: 0,
   attendanceList: [],
+  regReport: [],
 };
 
 export default (state = initialState, {type, payload}) => {
@@ -123,7 +150,7 @@ export default (state = initialState, {type, payload}) => {
         attendanceReport: payload.newArr,
         attendanceCount: payload.totalCount,
       };
-    case types.GET_EVENTS_FAILED:
+    case types.GET_ATTENDANCE_REPORT_FAILED:
       return {
         ...state,
         attendanceReport: [],
@@ -137,6 +164,16 @@ export default (state = initialState, {type, payload}) => {
       return {
         ...state,
         attendanceList: [],
+      };
+    case types.GET_REGREPORT_SUCCESS:
+      return {
+        ...state,
+        regReport: payload,
+      };
+    case types.GET_REGREPORT_FAILED:
+      return {
+        ...state,
+        regReport: [],
       };
     case types.CLEAR_SUCCESS:
       return initialState;
