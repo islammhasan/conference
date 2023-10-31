@@ -14,6 +14,7 @@ import Settings from '@screens/Settings';
 import Profile from '@screens/Profile';
 import PasswordChange from '@screens/PasswordChange';
 import Reports from '@screens/Reports';
+import DevLog from '@screens/DevLog';
 
 const Stack = createStackNavigator();
 
@@ -39,6 +40,7 @@ export const AppStack = () => {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="PasswordChange" component={PasswordChange} />
       <Stack.Screen name="Reports" component={Reports} />
+      <Stack.Screen name="DevLog" component={DevLog} />
     </Stack.Navigator>
   );
 };

@@ -22,14 +22,15 @@ export default ({route}) => {
   console.log('info ===>', info);
 
   const getData = async () => {
+    const body = {
+      reference_id: `${route?.params?.refId}`,
+      event: `${route?.params?.eventSlug}`,
+    };
     setLoading(true);
     try {
-      const res = await AxiosClient(`user/attendance`, {
-        body: {
-          reference_id: `${route?.params?.refId}`,
-        },
-      });
-      console.log('get attendee details ==>', res?.data?.attendee);
+      const res = await AxiosClient(`user/attendance`, {body: body});
+      // console.log('get attendee details ==>', res?.data?.attendee);
+      console.log('get attendee details ==>', res);
       if (res?.data?.attendee) {
         setInfo(res?.data?.attendee);
       } else {

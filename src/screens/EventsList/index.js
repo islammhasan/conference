@@ -20,7 +20,7 @@ import en from '../../locales/en';
 
 const EventItem = ({item, navigation}) => {
   const handlePress = () => {
-    navigation.navigate('Scanner', {eventId: item.id});
+    navigation.navigate('Scanner', {eventSlug: item.slug});
   };
 
   return <EventCard item={item} handlePress={handlePress} />;
