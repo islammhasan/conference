@@ -14,11 +14,11 @@ export const NavContainer = () => {
     <NavigationContainer>
       {!loggedUser ? (
         <AuthStack />
-      ) : loggedUser?.roles_id === 5 ? (
+      ) : loggedUser?.role_name === 'gate' ? (
         <UserStack />
-      ) : loggedUser?.roles_id === 2 ? (
+      ) : loggedUser?.role_name === 'admin' ? (
         <AdminStack />
-      ) : loggedUser?.roles_id === 4 ? (
+      ) : loggedUser?.role_name === 'exhibitors' ? (
         <ExhibitorStack />
       ) : null}
     </NavigationContainer>

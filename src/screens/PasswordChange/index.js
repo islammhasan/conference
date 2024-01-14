@@ -8,7 +8,7 @@ import en from '../../locales/en';
 import {useDispatch} from 'react-redux';
 import {changePassword} from '../../redux/user';
 
-export default Login = ({navigation}) => {
+export default () => {
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');

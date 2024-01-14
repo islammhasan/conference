@@ -77,6 +77,7 @@ export const getRegReport = () => async (dispatch, getState) => {
   try {
     const res = await AxiosClient(`user/registration-report`);
     if (res.data) {
+      console.log('reg reporttt',res.data);
       dispatch({
         type: types.GET_REGREPORT_SUCCESS,
         payload: res?.data,

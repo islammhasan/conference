@@ -34,14 +34,14 @@ import {
 import {getProfile} from '../../redux/user';
 
 export default ({navigation}) => {
-  const loggedUserType = useSelector(state => state?.user?.userInfo?.roles_id);
+  const loggedUserType = useSelector(state => state?.user?.userInfo?.role_name);
   const {attendanceReport, attendanceCount} = useSelector(
     state => state?.attendance,
   );
   const [activeBar, setActiveBar] = useState(null);
   const dispatch = useDispatch();
 
-  const isAdmin = loggedUserType === 2;
+  const isAdmin = loggedUserType === 'admin';
 
   const getData = async () => {
     await dispatch(getAttendanceReport());
@@ -73,7 +73,7 @@ export default ({navigation}) => {
         />
         <View>
           <Text style={styles.logoHeading}>Welcome</Text>
-          <Text style={styles.logoSubHeading}>Event App</Text>
+          <Text style={styles.logoSubHeading}>Kids Expo</Text>
         </View>
       </View>
     );

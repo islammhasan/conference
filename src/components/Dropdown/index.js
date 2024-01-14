@@ -6,7 +6,7 @@ import {StyleSheet} from 'react-native';
 
 export default props => {
   const [open, setOpen] = useState(false);
-  const {placeholder, values, theme, textStyle} = props;
+  const {placeholder, values, theme, textStyle, style, dropDownStyle} = props;
 
   return (
     <DropDownPicker
@@ -20,8 +20,8 @@ export default props => {
         value: 'id',
       }}
       listMode="SCROLLVIEW"
-      style={styles.pickerStyle}
-      dropDownContainerStyle={styles.dropDownContainerStyle}
+      style={style || styles.pickerStyle}
+      dropDownContainerStyle={dropDownStyle || styles.dropDownContainerStyle}
       textStyle={textStyle || styles.pickerTextStyle}
       labelStyle={{color: colors.black}}
       placeholder={placeholder}

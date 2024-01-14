@@ -30,7 +30,7 @@ export default ({navigation}) => {
   const {attendanceReport, attendanceCount, regReport, attendanceList} =
     useSelector(state => state?.attendance);
 
-  const {allResgistrar, selfResgistrar, manualResgistrar, exhibitorResgistrar} =
+  const {allRegistrar, selfRegistrar, manualRegistrar, exhibitorRegistrar} =
     regReport;
 
   console.log('regReport in screen =>', regReport);
@@ -62,28 +62,28 @@ export default ({navigation}) => {
     {
       id: '1r9h120',
       title: 'All registrars',
-      number: allResgistrar,
+      number: allRegistrar,
       icon: 'people',
       background: '#fcedfb',
     },
     {
       id: 'f13f9h9',
       title: 'Self Registered',
-      number: selfResgistrar,
+      number: selfRegistrar,
       icon: 'pencil',
       background: '#f2edfc',
     },
     {
       id: 'f1hp2h',
       title: 'Manual registrars',
-      number: manualResgistrar,
+      number: manualRegistrar,
       icon: 'headset',
       background: '#edfcf5',
     },
     {
       id: 'f199',
       title: 'Exhibitors',
-      number: exhibitorResgistrar,
+      number: exhibitorRegistrar,
       icon: 'volume-high',
       background: '#edfafc',
     },

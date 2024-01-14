@@ -1,20 +1,27 @@
 import React, {useState} from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, Text, TouchableOpacity} from 'react-native';
 import Container from '@components/Container';
 import Loader from '@components/Loader';
 import {styles} from './styles';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../redux/user';
 
 export default ({navigation}) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const isExhibitor =
+    useSelector(state => state?.user?.userInfo?.role_name) === 'exhibitors';
 
   const onLogout = async () => {
     setLoading(true);
     await dispatch(logout());
     setLoading(false);
   };
+
+  console.log(
+    isExhibitor,
+    useSelector(state => state.user.userInfo.role_name),
+  );
 
   const renderItem = ({item}) => {
     return (
@@ -47,7 +54,7 @@ export default ({navigation}) => {
       {loading && <Loader />}
       <Text style={styles.title}>Dashboard</Text>
       <FlatList
-        data={ITEMS}
+        data={isExhibitor ? exbItems : ITEMS}
         contentContainerStyle={styles.listStyle}
         keyExtractor={item => item.id}
         ListFooterComponent={footerComponent}
@@ -67,5 +74,23 @@ const ITEMS = [
     id: 'd9120',
     title: 'Password Change',
     nav: 'PasswordChange',
+  },
+];
+
+const exbItems = [
+  {
+    id: 'f12o',
+    title: 'Profile',
+    nav: 'Profile',
+  },
+  {
+    id: 'd9120',
+    title: 'Password Change',
+    nav: 'PasswordChange',
+  },
+  {
+    id: 'r291f1',
+    title: 'Request',
+    nav: 'Request',
   },
 ];

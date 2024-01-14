@@ -44,6 +44,7 @@ export const signIn = data => async (dispatch, getState) => {
 };
 
 export const getProfile = () => async (dispatch, getState) => {
+  const loginInfo = getState().user.userInfo;
   try {
     const res = await AxiosClient(`user/profile`);
     console.log('res from get profile', res.data);

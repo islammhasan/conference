@@ -2,7 +2,8 @@ import axios from 'axios';
 import {store} from '../redux/store';
 import {API_KEY} from '@env';
 
-const baseURL = `https://confapi.alsharqtech.com/v1`;
+const baseURL = `https://kidsexpo-api.alsharqtech.com/v1`;
+// const baseURL = `https://confapi.alsharqtech.com/v1`;
 
 export const AxiosClient = async (endpoint, args) => {
   const {body, ...additionalConfig} = args || {};
@@ -12,7 +13,7 @@ export const AxiosClient = async (endpoint, args) => {
     'Content-Type': customContentType
       ? 'multipart/form-data'
       : 'application/json',
-    uuid: API_KEY,
+    // uuid: API_KEY,
   };
   if (token) {
     headers.Authorization = `Bearer ${token}`;

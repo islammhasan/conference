@@ -14,6 +14,7 @@ import EventsList from '@screens/EventsList';
 import PDFReader from '@screens/PDFReader';
 import ExpressRegisteration from '@screens/ExpressRegisteration';
 import DevLog from '@screens/DevLog';
+import Request from '@screens/Request';
 
 const Stack = createStackNavigator();
 
@@ -43,6 +44,7 @@ export const ExhibitorStack = () => {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="PasswordChange" component={PasswordChange} />
       <Stack.Screen name="Reports" component={Reports} />
+      <Stack.Screen name="Request" component={Request} />
       <Stack.Screen name="DevLog" component={DevLog} />
     </Stack.Navigator>
   );

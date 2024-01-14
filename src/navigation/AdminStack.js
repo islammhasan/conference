@@ -14,6 +14,7 @@ import Profile from '@screens/Profile';
 import PasswordChange from '@screens/PasswordChange';
 import Reports from '@screens/Reports';
 import UserProfile from '@screens/UserProfile';
+import DevLog from '@screens/DevLog';
 
 const Stack = createStackNavigator();
 
@@ -68,6 +69,7 @@ export const AdminStack = () => {
         component={PasswordChange}
       />
       <Stack.Screen name="Reports" component={Reports} />
+      <Stack.Screen name="DevLog" component={DevLog} />
     </Stack.Navigator>
   );
 };

@@ -16,12 +16,12 @@ export default Scanner = ({navigation, route}) => {
   // const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isDev, setIsDev] = useState(true);
-  const loggedUserType = useSelector(state => state?.user?.userInfo?.roles_id);
+  const loggedUserType = useSelector(state => state?.user?.userInfo?.role_name);
   // const staffEventId = useSelector(state => state?.userdata?.events[0]?.id);
   const staffEventSlug = useSelector(state => state?.userdata?.events[0]?.slug);
-  const isExhibitor = loggedUserType === 4;
-  const isGen = loggedUserType === 5;
-  const isAdmin = loggedUserType === 2;
+  const isExhibitor = loggedUserType === 'exhibitors';
+  const isGen = loggedUserType === 'gate';
+  const isAdmin = loggedUserType === 'admin';
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
 
@@ -88,12 +88,16 @@ export default Scanner = ({navigation, route}) => {
         Alert.alert(null, en.somethingWentWrongPleaseTryAgainLater, [
           {text: en.ok},
         ]);
+        if (isDev) navigation.navigate('DevLog', {attr: res});
       }
       console.log('add attendee res ==>', res);
     } catch (error) {
       Alert.alert(null, en.somethingWentWrongPleaseTryAgainLater, [
         {text: en.ok},
       ]);
+      if (isDev) {
+        navigation.navigate('DevLog', {attr: error});
+      }
       console.log('error from add attendee', error);
     }
   };
@@ -114,10 +118,11 @@ export default Scanner = ({navigation, route}) => {
     } else if (isExhibitor) {
       addAttendance(e.data, route?.params?.eventSlug);
     } else if (isAdmin) {
-      navigation.navigate('UserProfile', {
-        refId: e.data,
-        eventSlug: route?.params?.eventSlug,
-      });
+      addAttendance(e.data, route?.params?.eventSlug);
+      // navigation.navigate('UserProfile', {
+      //   refId: e.data,
+      //   eventSlug: route?.params?.eventSlug,
+      // });
     } else {
       Alert.alert(null, en.somethingWentWrongPleaseTryAgainLater, [
         {text: 'Ok'},
@@ -132,8 +137,7 @@ export default Scanner = ({navigation, route}) => {
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        // onPress={() => setIsDev(!isDev)}
-        onPress={() => navigation.navigate('DevLog')}
+        onPress={() => setIsDev(!isDev)}
         style={{
           gap: 10,
           flexDirection: 'row',
@@ -167,6 +171,7 @@ export default Scanner = ({navigation, route}) => {
               onRead={onSuccess}
               reactivate={true}
               reactivateTimeout={5000}
+              showMarker
               // flashMode={RNCamera.Constants.FlashMode.torch}
               topContent={<Text style={styles.centerText}>Scan QR Code</Text>}
             />
