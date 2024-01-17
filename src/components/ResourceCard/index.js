@@ -2,6 +2,11 @@ import React from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../../assets/colors';
+import {
+  ScaledSheet,
+  moderateScale,
+  scale,
+} from 'react-native-size-matters/extend';
 
 export default ({item, handlePress}) => {
   return (
@@ -25,21 +30,21 @@ export default ({item, handlePress}) => {
   );
 };
 
-const styles = {
+const styles = ScaledSheet.create({
   itemContainer: {
-    width: 167.5,
-    height: 162,
+    width: scale(163.5),
+    height: scale(162),
     backgroundColor: colors.primary,
-    marginHorizontal: 4,
-    paddingVertical: 25,
-    paddingHorizontal: 16,
-    borderRadius: 16,
+    marginHorizontal: scale(4),
+    paddingVertical: scale(25),
+    paddingHorizontal: scale(16),
+    borderRadius: scale(16),
   },
   itemText: {
-    fontSize: 14,
+    fontSize: moderateScale(14),
     textAlign: 'left',
-    lineHeight: 21,
+    lineHeight: scale(21),
     color: colors.white,
-    marginTop: 8,
+    marginTop: scale(8),
   },
-};
+});

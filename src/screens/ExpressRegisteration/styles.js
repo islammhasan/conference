@@ -1,18 +1,13 @@
-import {StyleSheet} from 'react-native';
+import {ScaledSheet, scale} from 'react-native-size-matters/extend';
 
-export const styles = StyleSheet.create({
+export const styles = ScaledSheet.create({
   btn: {
-    marginVertical: 10,
-    height: 56,
-    marginHorizontal: 16,
-  },
-  input: {
-    width: '80%',
-    alignSelf: 'center',
-    zIndex: -1,
+    marginVertical: scale(10),
+    height: scale(56),
+    marginHorizontal: scale(16),
   },
   inputContainer: {
-    marginBottom: 12,
-    height: 56,
+    marginBottom: scale(12),
+    height: scale(56),
   },
 });

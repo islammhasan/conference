@@ -1,38 +1,42 @@
-import {StyleSheet} from 'react-native';
 import colors from '../../assets/colors';
+import {
+  ScaledSheet,
+  moderateScale,
+  scale,
+} from 'react-native-size-matters/extend';
 
-export const styles = StyleSheet.create({
+export const styles = ScaledSheet.create({
   title: {
-    marginStart: 20,
-    fontSize: 20,
-    marginTop: 20,
-    marginBottom: 10,
+    marginStart: scale(20),
+    fontSize: moderateScale(20),
+    marginTop: scale(20),
+    marginBottom: scale(10),
     color: colors.black,
   },
   listStyle: {
-    paddingVertical: 10,
+    paddingVertical: scale(10),
   },
   itemContainer: {
-    height: 50,
+    height: scale(50),
     flexDirection: 'row',
-    marginHorizontal: 20,
+    marginHorizontal: scale(20),
     backgroundColor: colors.offWhite,
-    padding: 10,
+    padding: scale(10),
     alignItems: 'center',
-    borderRadius: 6,
+    borderRadius: scale(6),
   },
   itemText: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: colors.dark,
     flex: 1,
   },
   btn: {
-    marginVertical: 10,
-    height: 56,
-    marginHorizontal: 16,
+    marginVertical: scale(10),
+    height: scale(56),
+    marginHorizontal: scale(16),
   },
   btnTxt: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 400,
   },
 });

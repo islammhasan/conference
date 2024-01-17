@@ -13,6 +13,7 @@ export default {
   ok: `Ok`,
   eventResources: `Event Resources`,
   eventsList: `Events list`,
+  settings: `Settings`,
   validation: {
     pleaseFillAllFields: `Please fill all fields`,
     allFieldsMustBe2CharactersAtLeast: `All fields must be 2 characters at least`,
@@ -31,4 +32,5 @@ export default {
   cancel: `Cancel`,
   attendees: `Attendees`,
   scanNewAttendee: `Scan new attendee`,
+  sendARequest: `Send a request`,
 };

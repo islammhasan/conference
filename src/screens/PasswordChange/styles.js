@@ -1,9 +1,9 @@
-import {StyleSheet} from 'react-native';
+import {ScaledSheet, scale} from 'react-native-size-matters/extend';
 
-export const styles = StyleSheet.create({
+export const styles = ScaledSheet.create({
   btn: {
-    marginTop: 56,
-    height: 56,
-    marginHorizontal: 16,
+    marginTop: scale(54),
+    height: scale(54),
+    marginHorizontal: scale(16),
   },
 });

@@ -1,48 +1,52 @@
-import {StyleSheet} from 'react-native';
 import colors from '../../assets/colors';
+import {
+  ScaledSheet,
+  moderateScale,
+  scale,
+} from 'react-native-size-matters/extend';
 
-export const styles = StyleSheet.create({
+export const styles = ScaledSheet.create({
   infoContainer: {
     flexDirection: 'row',
-    marginHorizontal: 16,
-    marginTop: 16,
+    marginHorizontal: scale(16),
+    marginTop: scale(16),
   },
   title: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     color: colors.black,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: scale(10),
   },
   infoInner: {
-    marginStart: 20,
+    marginStart: scale(20),
     alignItems: 'flex-start',
     flex: 1,
   },
   phoneContainer: {
-    height: 28,
+    height: scale(28),
     backgroundColor: colors.secondary,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
+    paddingHorizontal: scale(8),
+    paddingVertical: scale(2),
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 6,
+    borderRadius: scale(6),
   },
   phone: {
-    fontSize: 12,
+    fontSize: moderateScale(12),
     fontWeight: 'bold',
     color: colors.black,
   },
   profileImageContainer: {
-    width: 80,
-    height: 80,
+    width: scale(80),
+    height: scale(80),
     backgroundColor: '#DBFAE9',
-    borderRadius: 8,
+    borderRadius: scale(8),
   },
   profileImageStyle: {
-    width: 80,
-    height: 80,
+    width: scale(80),
+    height: scale(80),
   },
   additionalInfo: {
-    marginTop: 16,
+    marginTop: scale(16),
   },
 });

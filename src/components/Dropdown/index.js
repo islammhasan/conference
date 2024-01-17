@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import colors from '../../assets/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {StyleSheet} from 'react-native';
+import {ScaledSheet, scale} from 'react-native-size-matters/extend';
 
 export default props => {
   const [open, setOpen] = useState(false);
@@ -35,12 +35,12 @@ export default props => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
   pickerStyle: {
-    width: '80%',
-    height: 50,
+    width: scale(343),
+    height: scale(50),
     borderWidth: 0,
-    backgroundColor: colors.white,
+    backgroundColor: colors.red,
     borderBottomColor: colors.gray,
     borderBottomWidth: 1,
     borderRadius: 0,
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
   },
   dropDownContainerStyle: {
     backgroundColor: colors.white,
-    width: '80%',
+    width: scale(343),
     borderRadius: 0,
     borderColor: colors.gray,
     alignSelf: 'center',
   },
   pickerTextStyle: {
     color: colors.gray,
-    fontSize: 16,
+    fontSize: scale(14),
     textAlign: 'left',
   },
 });

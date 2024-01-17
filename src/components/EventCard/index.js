@@ -2,6 +2,11 @@ import React from 'react';
 import {TouchableOpacity, View, Text, Image} from 'react-native';
 import {images} from '../../assets/images';
 import colors from '../../assets/colors';
+import {
+  ScaledSheet,
+  moderateScale,
+  scale,
+} from 'react-native-size-matters/extend';
 
 export default ({item, handlePress}) => {
   const strippedDesc = item.description?.replace(
@@ -49,63 +54,63 @@ export default ({item, handlePress}) => {
   );
 };
 
-const styles = {
+const styles = ScaledSheet.create({
   eventItemContainer: {
-    height: 196,
-    marginHorizontal: 20,
+    height: scale(196),
+    marginHorizontal: scale(20),
     backgroundColor: colors.offWhite,
-    padding: 8,
-    borderRadius: 8,
+    padding: scale(8),
+    borderRadius: scale(8),
   },
   eventInfoContainer: {
     flexDirection: 'row',
   },
   eventInfoInner: {
-    paddingVertical: 8,
+    paddingVertical: scale(8),
     flex: 1,
   },
   eventImageContainer: {
-    width: 105,
-    height: 80,
-    borderRadius: 8,
+    width: scale(105),
+    height: scale(80),
+    borderRadius: scale(8),
     overflow: 'hidden',
-    marginEnd: 20,
+    marginEnd: scale(20),
     backgroundColor: colors.white,
   },
   eventImage: {
-    width: 105,
-    height: 80,
+    width: scale(105),
+    height: scale(80),
   },
   eventItemText: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: colors.black,
   },
   eventLocationContainer: {
     // maxWidth: '50%',
-    height: 32,
+    height: scale(32),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.secondary,
-    borderRadius: 4,
-    marginEnd: 12,
-    paddingHorizontal: 10,
+    borderRadius: scale(4),
+    marginEnd: scale(12),
+    paddingHorizontal: scale(10),
   },
   locationDateSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: scale(10),
   },
   eventLocationText: {
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: colors.black,
   },
   eventDate: {
     color: colors.black,
-    fontSize: 15,
+    fontSize: moderateScale(15),
     // flex: 1,
   },
   eventDescription: {
-    fontSize: 13,
+    fontSize: moderateScale(13),
     color: colors.darkgray,
   },
-};
+});

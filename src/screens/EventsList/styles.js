@@ -1,11 +1,15 @@
-import {StyleSheet} from 'react-native';
 import colors from '../../assets/colors';
+import {
+  ScaledSheet,
+  moderateScale,
+  scale,
+} from 'react-native-size-matters/extend';
 
-export const styles = StyleSheet.create({
+export const styles = ScaledSheet.create({
   title: {
-    marginStart: 20,
-    fontSize: 18,
-    marginTop: 15,
+    marginStart: scale(20),
+    fontSize: moderateScale(18),
+    marginTop: scale(15),
     color: colors.black,
   },
 });

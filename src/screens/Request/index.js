@@ -110,6 +110,7 @@ export default () => {
               onChangeText={val => setTitle(val)}
               style={styles.input}
             /> */}
+            <Text style={styles.heading}>{en.sendARequest}</Text>
             <Input
               placeholder={'Subject'}
               value={subject}

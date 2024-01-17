@@ -1,42 +1,46 @@
-import {StyleSheet} from 'react-native';
 import colors from '../../assets/colors';
+import {
+  ScaledSheet,
+  moderateScale,
+  scale,
+} from 'react-native-size-matters/extend';
 
-export const styles = StyleSheet.create({
+export const styles = ScaledSheet.create({
   logo: {
-    width: 87,
-    height: 96,
+    width: scale(87),
+    height: scale(96),
     alignSelf: 'center',
-    marginBottom: 30,
+    marginBottom: scale(30),
   },
   title: {
-    fontSize: 56,
+    fontSize: moderateScale(56),
     fontWeight: 'bold',
     alignSelf: 'center',
-    marginBottom: 30,
+    marginBottom: scale(30),
     color: colors.text,
   },
   heading: {
-    fontSize: 30,
+    fontSize: moderateScale(30),
     fontWeight: 'bold',
     alignSelf: 'center',
-    marginBottom: 20,
+    marginBottom: scale(20),
     color: colors.text,
   },
   subHeading: {
-    fontSize: 14,
+    fontSize: moderateScale(14),
     alignSelf: 'center',
-    marginBottom: 32,
+    marginBottom: scale(32),
     textAlign: 'center',
-    marginHorizontal: 20,
+    marginHorizontal: scale(20),
     color: colors.text,
   },
   btn: {
-    height: 64,
-    marginTop: 50,
-    marginHorizontal: 16,
-    // alignSelf: 'center',
+    height: scale(64),
+    marginTop: scale(50),
+    marginBottom: scale(16),
+    marginHorizontal: scale(16),
   },
   inputContainer: {
-    marginBottom: 12,
+    marginBottom: scale(12),
   },
 });

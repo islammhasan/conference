@@ -1,22 +1,33 @@
-import {StyleSheet} from 'react-native';
 import colors from '../../assets/colors';
+import {
+  ScaledSheet,
+  moderateScale,
+  scale,
+} from 'react-native-size-matters/extend';
 
-export const styles = StyleSheet.create({
+export const styles = ScaledSheet.create({
+  heading: {
+    marginHorizontal: scale(16),
+    textAlign: 'left',
+    marginBottom: scale(12),
+    fontSize: scale(18),
+    color: colors.dark,
+  },
   btn: {
-    marginTop: 56,
-    height: 56,
-    marginHorizontal: 16,
+    marginTop: scale(56),
+    height: scale(56),
+    marginHorizontal: scale(16),
   },
   failedText: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     alignSelf: 'center',
     color: colors.darkgray,
     textAlign: 'center',
   },
   reloadBtn: {
-    marginTop: 56,
-    height: 56,
-    marginHorizontal: 55,
+    marginTop: scale(56),
+    height: scale(56),
+    marginHorizontal: scale(55),
     backgroundColor: colors.white,
     borderWidth: 1,
     borderColor: colors.primary,
@@ -26,21 +37,21 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
   },
   picker: {
-    width: 398,
+    width: scale(343),
     borderWidth: 0,
-    marginHorizontal: 16,
-    height: 64,
-    borderRadius: 12,
+    marginHorizontal: scale(16),
+    height: scale(64),
+    borderRadius: scale(12),
     backgroundColor: colors.offWhite,
-    paddingHorizontal: 12,
-    paddingVertical: 20,
-    marginTop: 10,
+    paddingHorizontal: scale(12),
+    paddingVertical: scale(20),
+    marginTop: scale(10),
   },
   pickerDropDown: {
     backgroundColor: colors.white,
-    width: 398,
+    width: scale(343),
     alignSelf: 'center',
-    borderRadius: 12,
+    borderRadius: scale(12),
     borderColor: colors.gray,
   },
 });

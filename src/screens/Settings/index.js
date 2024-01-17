@@ -5,6 +5,7 @@ import Loader from '@components/Loader';
 import {styles} from './styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../redux/user';
+import en from '../../locales/en';
 
 export default ({navigation}) => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ export default ({navigation}) => {
   return (
     <Container>
       {loading && <Loader />}
-      <Text style={styles.title}>Dashboard</Text>
+      <Text style={styles.title}>{en.settings}</Text>
       <FlatList
         data={isExhibitor ? exbItems : ITEMS}
         contentContainerStyle={styles.listStyle}

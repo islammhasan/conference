@@ -1,11 +1,15 @@
-import {StyleSheet} from 'react-native';
 import colors from '../../assets/colors';
+import {
+  ScaledSheet,
+  moderateScale,
+  scale,
+} from 'react-native-size-matters/extend';
 
-export const styles = StyleSheet.create({
+export const styles = ScaledSheet.create({
   centerText: {
     flex: 1,
-    fontSize: 18,
-    padding: 32,
+    fontSize: moderateScale(18),
+    padding: scale(32),
     color: '#777',
   },
   textBold: {
@@ -13,30 +17,30 @@ export const styles = StyleSheet.create({
     color: colors.black,
   },
   buttonText: {
-    fontSize: 21,
+    fontSize: moderateScale(21),
     color: 'rgb(0,122,255)',
   },
   buttonTouchable: {
-    padding: 16,
+    padding: scale(16),
   },
   logoutBtn: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingHorizontal: scale(10),
+    paddingVertical: scale(5),
   },
   logoutTxt: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: colors.red,
   },
   noEventsView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 30,
+    paddingHorizontal: scale(30),
   },
   noEventsText: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: colors.black,
   },
 });

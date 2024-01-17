@@ -7,6 +7,11 @@ import {
   View,
 } from 'react-native';
 import colors from '../../assets/colors';
+import {
+  ScaledSheet,
+  moderateScale,
+  scale,
+} from 'react-native-size-matters/extend';
 
 export default props => {
   const {
@@ -42,31 +47,31 @@ export default props => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
   container: {
-    marginHorizontal: 16,
-    height: 64,
-    borderRadius: 12,
+    marginHorizontal: scale(16),
+    height: scale(58),
+    borderRadius: scale(12),
     backgroundColor: colors.offWhite,
     justifyContent: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 20,
+    paddingHorizontal: scale(12),
+    paddingVertical: scale(20),
   },
   titleArea: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 16,
-    marginBottom: 10,
+    marginHorizontal: scale(16),
+    marginBottom: scale(10),
   },
   actionBtnTxt: {
     color: colors.primary,
-    fontSize: 12,
+    fontSize: moderateScale(12),
     textAlign: 'right',
   },
   inputStyle: {
     color: colors.black,
-    fontSize: 15,
-    height: 64,
+    fontSize: moderateScale(14),
+    height: scale(64),
   },
   name: {
     flex: 1,

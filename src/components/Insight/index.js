@@ -2,6 +2,11 @@ import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import colors from '../../assets/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {
+  ScaledSheet,
+  moderateScale,
+  scale,
+} from 'react-native-size-matters/extend';
 
 export default props => {
   const {title, number, icon, style, background} = props;
@@ -16,15 +21,15 @@ export default props => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
   container: {
-    width: 190,
-    height: 190,
-    borderRadius: 10,
+    width: scale(166.5),
+    height: scale(166.5),
+    borderRadius: scale(10),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f2edfc',
-    padding: 10,
+    padding: scale(10),
     shadowColor: colors.black,
     shadowOffset: {
       width: 0,
@@ -35,16 +40,16 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: colors.dark,
-    marginTop: 15,
+    marginTop: scale(15),
     textAlign: 'center',
     textTransform: 'capitalize',
   },
   number: {
-    fontSize: 40,
+    fontSize: moderateScale(40),
     color: colors.dark,
-    marginTop: 10,
+    marginTop: scale(10),
     textAlign: 'center',
   },
 });
