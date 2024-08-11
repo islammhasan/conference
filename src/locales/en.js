@@ -32,5 +32,12 @@ export default {
   cancel: `Cancel`,
   attendees: `Attendees`,
   scanNewAttendee: `Scan new attendee`,
+  scan: `Scan`,
+  scanAnother: `Scan Another`,
   sendARequest: `Send a request`,
+  actions: `Actions`,
+  eventResources: `Event Resources`,
+  registrars: `Registrars`,
+  eventsList: `Events List`,
+  registration: `Registration`,
 };

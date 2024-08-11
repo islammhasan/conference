@@ -73,9 +73,25 @@ export default Scanner = ({navigation, route}) => {
     try {
       const res = await AxiosClient(`user/attendance`, {body: body});
       if (res.data.attendee) {
-        Alert.alert(null, en.successfullyAddedToTheAttendanceList, [
-          {text: en.ok},
-        ]);
+        if (res.data.status === false) {
+          Alert.alert(null, `${res?.data?.data}`, [
+            {text: en.ok},
+            {
+              text: en.scanAnother,
+              onPress: () =>
+                navigation.navigate('Scanner', {eventSlug: eventSlug}),
+            },
+          ]);
+        } else {
+          Alert.alert(null, en.successfullyAddedToTheAttendanceList, [
+            {text: en.ok},
+            {
+              text: en.scanAnother,
+              onPress: () =>
+                navigation.navigate('Scanner', {eventSlug: eventSlug}),
+            },
+          ]);
+        }
         if (isDev) {
           navigation.navigate('DevLog', {attr: res});
         } else if (!isGen) {
@@ -84,6 +100,9 @@ export default Scanner = ({navigation, route}) => {
             eventSlug: route?.params?.eventSlug,
           });
         }
+      } else if (res.data.status === false) {
+        Alert.alert(null, `${res?.data?.data}`, [{text: en.ok}]);
+        if (isDev) navigation.navigate('DevLog', {attr: res});
       } else {
         Alert.alert(null, en.somethingWentWrongPleaseTryAgainLater, [
           {text: en.ok},

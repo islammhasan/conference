@@ -33,9 +33,9 @@ export const getEvents = () => async (dispatch, getState) => {
 export const getResources = () => async (dispatch, getState) => {
   try {
     const res = await AxiosClient(`user/event-resource`);
-    console.log('res from get resources ==>', res.data.data);
-    if (res?.data?.data) {
-      dispatch({type: types.GET_RESOURCES_SUCCESS, payload: res});
+    console.log('res from get resources ==>', res.data);
+    if (res?.data) {
+      dispatch({type: types.GET_RESOURCES_SUCCESS, payload: res.data});
     } else {
       dispatch({type: types.GET_RESOURCES_FAILED});
       Alert.alert(null, en.somethingWentWrongPleaseTryAgainLater, [
@@ -77,7 +77,7 @@ export default (state = initialState, {type, payload}) => {
     case types.GET_RESOURCES_SUCCESS:
       return {
         ...state,
-        resources: payload.data.data,
+        resources: payload,
       };
     case types.GET_RESOURCES_FAILED:
       return {

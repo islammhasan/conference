@@ -99,7 +99,7 @@ export default ({navigation}) => {
         <View style={{backgroundColor: colors.bg, height: 60}} />
         <View style={styles.profileImageContainer}>
           <Image
-            source={images.profile2}
+            source={images.profile}
             resizeMode="contain"
             style={styles.profileImageStyle}
           />

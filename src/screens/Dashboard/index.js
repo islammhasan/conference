@@ -32,6 +32,8 @@ import {
   getRegReport,
 } from '../../redux/attendance';
 import {getProfile} from '../../redux/user';
+import en from '../../locales/en';
+import { scale } from 'react-native-size-matters/extend';
 
 export default ({navigation}) => {
   const loggedUserType = useSelector(state => state?.user?.userInfo?.role_name);
@@ -67,7 +69,7 @@ export default ({navigation}) => {
     return (
       <View style={styles.logoContainer}>
         <Image
-          style={{width: 28, height: 31}}
+          style={{width: scale(37)}}
           resizeMode="contain"
           source={images.logo}
         />
@@ -215,11 +217,11 @@ export default ({navigation}) => {
           </VictoryChart>
           <View style={styles.actionsContainer}>
             <Text numberOfLines={1} style={styles.heading}>
-              Actions
+              {en.actions}
             </Text>
             <View style={styles.actionsList}>
               <ActionItem
-                heading="Event Resources"
+                heading={en.eventResources}
                 layout="tall"
                 icon="document"
                 bgColor="#0061FF"
@@ -227,8 +229,8 @@ export default ({navigation}) => {
               />
               <View style={{gap: 8}}>
                 <ActionItem
-                  heading="Registrars"
-                  subHeading="(QR Scan)"
+                  heading={en.registrars}
+                  subHeading={`(${en.scan})`}
                   layout="regular"
                   icon="reorder-three"
                   onPress={() =>
@@ -236,8 +238,8 @@ export default ({navigation}) => {
                   }
                 />
                 <ActionItem
-                  heading="Events List"
-                  subHeading="(QR Scan)"
+                  heading={en.eventsList}
+                  subHeading={`(${en.scan})`}
                   layout="regular"
                   icon="calendar"
                   bgColor="#12C5FF"
@@ -245,7 +247,7 @@ export default ({navigation}) => {
                 />
               </View>
               <ActionItem
-                heading="Registration"
+                heading={en.registration}
                 layout="horizontal"
                 icon="person-add"
                 bgColor="#1FDAC4"

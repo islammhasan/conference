@@ -7,8 +7,8 @@ import {
 
 export const styles = ScaledSheet.create({
   logo: {
-    width: scale(87),
-    height: scale(96),
+    width: scale(200),
+    height: scale(165.85),
     alignSelf: 'center',
     marginBottom: scale(30),
   },

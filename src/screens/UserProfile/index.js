@@ -1,4 +1,4 @@
-import {View, Text, Image, Alert} from 'react-native';
+import {View, Text, Image, Alert, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Container from '../../components/Container';
 import InfoRow from '../../components/InfoRow';
@@ -54,39 +54,41 @@ export default ({route}) => {
         <Loader whiteBG />
       ) : (
         <Container style={{marginTop: 15}}>
-          <View style={styles.infoContainer}>
-            <View style={styles.profileImageContainer}>
-              <Image
-                source={images.profile}
-                resizeMode="contain"
-                style={styles.profileImageStyle}
-              />
-            </View>
-            <View style={styles.infoInner}>
-              <Text numberOfLines={1} style={styles.title}>
-                {user?.title || info?.title || en.defaultText}
-              </Text>
-              <View style={styles.phoneContainer}>
-                <Text numberOfLines={1} style={styles.phone}>
-                  {user?.mobile || info?.mobile || en.defaultText}
+          <ScrollView>
+            <View style={styles.infoContainer}>
+              <View style={styles.profileImageContainer}>
+                <Image
+                  source={images.profile}
+                  resizeMode="contain"
+                  style={styles.profileImageStyle}
+                />
+              </View>
+              <View style={styles.infoInner}>
+                <Text numberOfLines={1} style={styles.title}>
+                  {user?.title || info?.title || en.defaultText}
                 </Text>
+                <View style={styles.phoneContainer}>
+                  <Text numberOfLines={1} style={styles.phone}>
+                    {user?.mobile || info?.mobile || en.defaultText}
+                  </Text>
+                </View>
               </View>
             </View>
-          </View>
-          <View style={styles.additionalInfo}>
-            <InfoRow
-              title="Email"
-              desc={user?.email || info?.email || en.defaultText}
-            />
-            <InfoRow
-              title="Job Title"
-              desc={user?.designation || info?.designation || en.defaultText}
-            />
-            <InfoRow
-              title="Company"
-              desc={user?.company || info?.company || en.defaultText}
-            />
-          </View>
+            <View style={styles.additionalInfo}>
+              <InfoRow
+                title="Email"
+                desc={user?.email || info?.email || en.defaultText}
+              />
+              <InfoRow
+                title="Job Title"
+                desc={user?.designation || info?.designation || en.defaultText}
+              />
+              <InfoRow
+                title="Company"
+                desc={user?.company || info?.company || en.defaultText}
+              />
+            </View>
+          </ScrollView>
         </Container>
       )}
     </>
